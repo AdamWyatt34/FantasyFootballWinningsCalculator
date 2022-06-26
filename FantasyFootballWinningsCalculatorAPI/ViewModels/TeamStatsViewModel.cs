@@ -8,8 +8,6 @@ namespace FantasyFootballWinningsCalculator.ViewModels
     public class TeamStatsViewModel
     {
         public Team Team { get; set; }
-        //public Dictionary<PrizeDescriptions, (string, double)> Winnings { get; set; } = new Dictionary<PrizeDescriptions, (string, double)>();
-
         public List<FullPrizeDescriptions> FullPrizeDescriptions { get; set; } = new List<FullPrizeDescriptions>();
     }
 
