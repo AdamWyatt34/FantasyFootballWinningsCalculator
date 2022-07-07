@@ -7,7 +7,7 @@ namespace FantasyFootballWinningsCalculatorAPI.Services
 {
     public static class EspnHttpClientService<T> where T : class
     {
-        public async static Task<List<T>> GetDataFromEspn(string url, APIOptions options)
+        public async static Task<T> GetDataFromEspn(string url, APIOptions options)
         {
             var cookieContainer = new CookieContainer();
            
@@ -25,7 +25,7 @@ namespace FantasyFootballWinningsCalculatorAPI.Services
                 cookieContainer.Add(new Uri(url), new Cookie(Enum.GetName(typeof(CookieKeys), 0), options.SWIDCookie));
                 cookieContainer.Add(new Uri(url), new Cookie(Enum.GetName(typeof(CookieKeys), 1), options.Espn_S2Cookie));
 
-                var output = await client.GetFromJsonAsync<List<T>>(url);
+                var output = await client.GetFromJsonAsync<T>(url);
 
                 return output;
             }

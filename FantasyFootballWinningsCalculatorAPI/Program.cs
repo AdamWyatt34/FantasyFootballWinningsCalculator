@@ -14,6 +14,7 @@ var apiSection = builder.Configuration.GetSection("API");
 builder.Services.Configure<WinningsOptions>(winningsSection);
 builder.Services.Configure<APIOptions>(apiSection);
 builder.Services.AddHttpClient();
+builder.Services.AddCors(c => { c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin()); });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,6 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(cors => cors.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

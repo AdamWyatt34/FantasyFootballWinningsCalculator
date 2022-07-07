@@ -20,13 +20,15 @@ namespace FantasyFootballWinningsCalculatorAPI.Controllers
         [Route("{year}/{isHistorical}")]
         public async Task<List<Team>> GetTeams(int year, bool isHistorical)
         {
-            var path = isHistorical ? _options.HistoricalPath : _options.CurrentPath;
+            var path = isHistorical ? _options.HistoricalPath : $"{ _options.CurrentPath}/{year}/segments/0/leagues";
 
             var url = $"{path}/{_options.LeagueId}?seasonId={year}";
 
-            var leagueInfo = await EspnHttpClientService<LeagueInfoModel>.GetDataFromEspn(url, _options);
+            var leagueInfo = isHistorical ? 
+                (await EspnHttpClientService<List<LeagueInfoModel>>.GetDataFromEspn(url, _options)).First() :
+                await EspnHttpClientService<LeagueInfoModel>.GetDataFromEspn(url, _options);
 
-            return leagueInfo.First().teams;
+            return leagueInfo.teams;
         }
     }
 }
