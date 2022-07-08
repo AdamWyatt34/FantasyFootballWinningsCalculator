@@ -14,17 +14,16 @@ function TeamSelect() {
   const [selectedYear, setSelectedYear] = useState(2022);
 
   const years = currentYears();
+  const api =
+    "https://fantasyfootballwinningscalculatorapi.azurewebsites.net/api/";
 
   useEffect(() => {
     const getTeams = async () => {
       const isHistorical = years.find(
         (x) => x.year === selectedYear
       )?.isHistorical;
-      console.log(
-        `https://localhost:7027/api/teams/${selectedYear}/${isHistorical}`
-      );
       const response = await httpService.get<Team[]>(
-        `https://localhost:7027/api/teams/${selectedYear}/${isHistorical}`
+        `${api}teams/${selectedYear}/${isHistorical}`
       );
       setTeams(response.data);
     };
@@ -37,7 +36,7 @@ function TeamSelect() {
         (x) => x.year === selectedYear
       )?.isHistorical;
       const response = await httpService.get<TeamStatsViewModel>(
-        `https://localhost:7027/api/winnings/${selectedOption}/${selectedYear}/${isHistorical}`
+        `${api}winnings/${selectedOption}/${selectedYear}/${isHistorical}`
       );
       setWinnings(response.data);
     };
