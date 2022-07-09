@@ -60,4 +60,4 @@ jobs:
           app-name: '1Genius9Idiots'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A55A60B39E784800A9FB7060C684954F }}
-          package: .
+          package: build
