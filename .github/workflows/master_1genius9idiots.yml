@@ -29,7 +29,7 @@ jobs:
           npm install
           CI='' npm run build
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip release.zip ./fantasyfootballwinningscalculatorui -r
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
@@ -58,4 +58,4 @@ jobs:
           app-name: '1Genius9Idiots'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A55A60B39E784800A9FB7060C684954F }}
-          package: ./fantasyfootballwinningscalculatorui/build
+          package: ./build
