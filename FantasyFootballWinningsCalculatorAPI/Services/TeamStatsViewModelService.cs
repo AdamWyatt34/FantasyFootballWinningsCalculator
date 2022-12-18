@@ -36,38 +36,40 @@ namespace FantasyFootballWinningsCalculatorAPI.Services
 
             //1st check if playoff seed is less than or equal to minimum
             var finalPlacement = team.rankCalculatedFinal;
-            if (finalPlacement <= options.MinimumNonSuperbowl)
-            {
-                output.FullPrizeDescriptions.Add(CreateFullPrizeDescription(
-                    PrizeDescriptions.FirstRoundPlayoff,
-                    $"Made it to 1st round playoffs",
-                    totalPayout * options.FirstRoundPlayoffs));
-            }
+            // if (finalPlacement <= options.MinimumNonSuperbowl)
+            // {
+            //     output.FullPrizeDescriptions.Add(CreateFullPrizeDescription(
+            //         PrizeDescriptions.FirstRoundPlayoff,
+            //         $"Made it to 1st round playoffs",
+            //         totalPayout * options.FirstRoundPlayoffs));
+            // }
 
             //2nd round check if final placement is between max and min non superbowl
-            if (finalPlacement >= options.MaximumNonSuperbowl && finalPlacement <= options.MinimumNonSuperbowl)
+            // Dev note: Changing to 1st to accomodate change in schedule for 2022 year
+            if (finalPlacement != 0 && finalPlacement >= options.MaximumNonSuperbowl && finalPlacement <= options.MinimumNonSuperbowl)
             {
                 output.FullPrizeDescriptions.Add(CreateFullPrizeDescription(
                    PrizeDescriptions.SecondRoundPlayoff,
-                   $"Made it to 2nd round playoffs",
+                   $"Made it to 1st round playoffs",
                    totalPayout * options.SecondRoundPlayoffs));
             }
 
-            //Then superbowl placement (loser or winner) check if final placement is 2nd or 1st 
-            if (finalPlacement == 2) //superbowl loser
+            switch (finalPlacement)
             {
-                output.FullPrizeDescriptions.Add(CreateFullPrizeDescription(
-                   PrizeDescriptions.SuperbowlLoser,
-                   $"Lost in the Superbowl",
-                  totalPayout * options.SuperbowlLoser));
-            }
-
-            if (finalPlacement == 1)
-            {
-                output.FullPrizeDescriptions.Add(CreateFullPrizeDescription(
-                   PrizeDescriptions.SuperbowlLoser,
-                   $"Superbowl Winner",
-                  totalPayout * options.SuperbowlWinner));
+                //Then superbowl placement (loser or winner) check if final placement is 2nd or 1st 
+                //superbowl loser
+                case 2:
+                    output.FullPrizeDescriptions.Add(CreateFullPrizeDescription(
+                        PrizeDescriptions.SuperbowlLoser,
+                        $"Lost in the Superbowl",
+                        totalPayout * options.SuperbowlLoser));
+                    break;
+                case 1:
+                    output.FullPrizeDescriptions.Add(CreateFullPrizeDescription(
+                        PrizeDescriptions.SuperbowlLoser,
+                        $"Superbowl Winner",
+                        totalPayout * options.SuperbowlWinner));
+                    break;
             }
 
             //Then top position players
