@@ -36,21 +36,20 @@ namespace FantasyFootballWinningsCalculatorAPI.Services
 
             //1st check if playoff seed is less than or equal to minimum
             var finalPlacement = team.rankCalculatedFinal;
-            // if (finalPlacement <= options.MinimumNonSuperbowl)
-            // {
-            //     output.FullPrizeDescriptions.Add(CreateFullPrizeDescription(
-            //         PrizeDescriptions.FirstRoundPlayoff,
-            //         $"Made it to 1st round playoffs",
-            //         totalPayout * options.FirstRoundPlayoffs));
-            // }
+            if (finalPlacement <= options.MinimumNonSuperbowl)
+            {
+                output.FullPrizeDescriptions.Add(CreateFullPrizeDescription(
+                    PrizeDescriptions.FirstRoundPlayoff,
+                    $"Made it to 1st round playoffs",
+                    totalPayout * options.FirstRoundPlayoffs));
+            }
 
             //2nd round check if final placement is between max and min non superbowl
-            // Dev note: Changing to 1st to accomodate change in schedule for 2022 year
             if (finalPlacement != 0 && finalPlacement >= options.MaximumNonSuperbowl && finalPlacement <= options.MinimumNonSuperbowl)
             {
                 output.FullPrizeDescriptions.Add(CreateFullPrizeDescription(
                    PrizeDescriptions.SecondRoundPlayoff,
-                   $"Made it to 1st round playoffs",
+                   $"Made it to @nd round playoffs",
                    totalPayout * options.SecondRoundPlayoffs));
             }
 
