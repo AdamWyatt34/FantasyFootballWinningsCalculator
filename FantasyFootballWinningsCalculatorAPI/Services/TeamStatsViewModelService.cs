@@ -49,7 +49,7 @@ namespace FantasyFootballWinningsCalculatorAPI.Services
             {
                 output.FullPrizeDescriptions.Add(CreateFullPrizeDescription(
                    PrizeDescriptions.SecondRoundPlayoff,
-                   $"Made it to @nd round playoffs",
+                   $"Made it to 2nd round playoffs",
                    totalPayout * options.SecondRoundPlayoffs));
             }
 
