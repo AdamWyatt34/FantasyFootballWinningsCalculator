@@ -6,6 +6,7 @@ export interface LeagueYears {
 export function currentYears(): LeagueYears[] {
   return [
     { year: 2021, isHistorical: true },
-    { year: 2022, isHistorical: false },
+    { year: 2022, isHistorical: true },
+    { year: 2023, isHistorical: false },
   ];
 }
